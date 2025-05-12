@@ -49,11 +49,14 @@
         }
         .container {
             max-width: 900px;
+            width: 100%; /* Assicura che prenda la larghezza disponibile */
             margin: 0 auto;
             background: white;
             padding: 20px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
             border-radius: 5px;
+            box-sizing: border-box; /* Include padding nel calcolo della larghezza */
+            overflow: hidden; /* Assicura che il contenuto non esca */
         }
         h1 {
             text-align: center;
@@ -69,26 +72,32 @@
             display: flex;
             align-items: center;
             margin-bottom: 12px;
+            flex-wrap: nowrap; /* Impedisce che gli elementi vadano a capo */
+            box-sizing: border-box; /* Assicura che padding e bordi siano inclusi nella larghezza */
+            width: 100%; /* Assicura che l'intero gruppo occupi lo spazio disponibile */
         }
         .input-group label {
-            width: 280px;
+            width: 55%; /* Usiamo percentuali invece di pixel fissi */
             font-weight: bold;
+            padding-right: 10px; /* Aggiungiamo spazio a destra */
+            flex-shrink: 1; /* Permettiamo al label di restringersi se necessario */
         }
         .input-group input, .input-group select {
-            width: 120px;
+            width: 25%; /* Usiamo percentuali invece di pixel fissi */
+            min-width: 80px; /* Ma manteniamo una larghezza minima */
             padding: 8px;
             border: 1px solid #ddd;
             border-radius: 4px;
+            box-sizing: border-box; /* Include padding nel calcolo della larghezza */
         }
         .input-group .unit {
             margin-left: 10px;
             color: #666;
-            width: 60px;
-            /* Correzione per le unità di misura che escono fuori */
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            flex-shrink: 0;
+            width: auto; /* Larghezza automatica basata sul contenuto */
+            min-width: 40px; /* Larghezza minima */
+            text-align: left; /* Allinea a sinistra */
+            flex-grow: 0; /* Non crescere */
+            flex-shrink: 0; /* Non ridurre */
         }
         .section-title {
             background-color: #0b5e36;
@@ -181,13 +190,28 @@
             .two-columns {
                 flex-direction: column;
             }
-            /* Correzione aggiuntiva per schermi piccoli */
+            .container {
+                padding: 15px 10px; /* Riduce il padding nei dispositivi mobili */
+            }
+            /* Migliore gestione degli input su schermi piccoli */
             .input-group {
-                flex-wrap: wrap;
+                flex-wrap: nowrap; /* Mantiene tutto su una riga */
+                margin-bottom: 15px; /* Più spazio tra gli elementi */
+            }
+            .input-group label {
+                width: 50%; /* Riduce leggermente la larghezza dell'etichetta */
+                font-size: 14px; /* Riduce la dimensione del testo */
+            }
+            .input-group input, .input-group select {
+                width: 30%; /* Aumenta la proporzione per l'input */
+                min-width: 70px; /* Larghezza minima ridotta */
+                padding: 6px; /* Padding ridotto */
             }
             .input-group .unit {
                 margin-left: 5px;
-                width: auto;
+                width: 20%; /* Assegna uno spazio fisso per l'unità */
+                min-width: 30px; /* Larghezza minima */
+                font-size: 13px; /* Riduce la dimensione del testo */
             }
         }
     </style>
